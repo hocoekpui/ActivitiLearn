@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE bpmn:definitions>
+
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:activiti="http://activiti.org/bpmn" id="Definitions_0001" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:process id="ProcessListener" name="执行监听" isExecutable="true">
+    <bpmn:extensionElements/>
+    <startEvent xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="sid-33b93c50-391d-43ae-aa8d-f0fadb962e48"/>
+    <endEvent xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="sid-d9e25e91-9358-4bf9-92c5-251205ac0687"/>
+    <userTask xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="sid-8b6657a3-9a72-415f-b9e5-c09fc5f8ba55" activiti:assignee="a">
+      <extensionElements>
+        <activiti:executionListener class="com.example.activitilearn.listener.ProcListener" event="start">
+          <activiti:field name="noticeType">
+            <activiti:string>mail</activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="sid-5f6dcfb9-83be-4d7e-8a28-88df2d03e2ef" sourceRef="sid-33b93c50-391d-43ae-aa8d-f0fadb962e48" targetRef="sid-8b6657a3-9a72-415f-b9e5-c09fc5f8ba55"/>
+    <sequenceFlow xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="sid-2be4b24f-fef8-40ba-87b4-158f75648bc0" sourceRef="sid-8b6657a3-9a72-415f-b9e5-c09fc5f8ba55" targetRef="sid-d9e25e91-9358-4bf9-92c5-251205ac0687"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="ProcessListener">
+      <bpmndi:BPMNShape id="shape-d61201b0-79f4-42ea-b7a4-e6e83127a041" bpmnElement="sid-33b93c50-391d-43ae-aa8d-f0fadb962e48">
+        <omgdc:Bounds xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" x="455.0" y="390.0" width="30.0" height="30.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape-344bad5a-46c6-4a7b-bb12-7b16649ad516" bpmnElement="sid-d9e25e91-9358-4bf9-92c5-251205ac0687">
+        <omgdc:Bounds xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" x="710.0" y="415.0" width="30.0" height="30.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape-3a31bfe2-4b60-4dbc-b195-55e615869114" bpmnElement="sid-8b6657a3-9a72-415f-b9e5-c09fc5f8ba55">
+        <omgdc:Bounds xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" x="530.0" y="415.0" width="100.0" height="80.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="edge-3edb75e0-6b7c-45c6-bd1d-dad44c4fa321" bpmnElement="sid-5f6dcfb9-83be-4d7e-8a28-88df2d03e2ef">
+        <omgdi:waypoint xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" x="485.0" y="412.5"/>
+        <omgdi:waypoint xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" x="530.0" y="435.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge-ebfd8950-12cb-49f0-9650-966f6d29a250" bpmnElement="sid-2be4b24f-fef8-40ba-87b4-158f75648bc0">
+        <omgdi:waypoint xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" x="630.0" y="435.0"/>
+        <omgdi:waypoint xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" x="710.0" y="437.5"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

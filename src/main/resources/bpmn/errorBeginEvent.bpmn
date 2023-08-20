@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:activiti="http://activiti.org/bpmn" id="sample-diagram" targetNamespace="http://activiti.org/bpmn" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+  <bpmn2:process id="ErrorBeginEventTest" name="错误开始事件测速" isExecutable="true">
+    <bpmn2:startEvent id="StartEvent_1">
+      <bpmn2:outgoing>Flow_1xlqjd9</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:userTask id="Activity_1frat0s" activiti:assignee="a">
+      <bpmn2:incoming>Flow_1xlqjd9</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_1rt2f22</bpmn2:outgoing>
+    </bpmn2:userTask>
+    <bpmn2:sequenceFlow id="Flow_1xlqjd9" sourceRef="StartEvent_1" targetRef="Activity_1frat0s" />
+    <bpmn2:sequenceFlow id="Flow_1rt2f22" sourceRef="Activity_1frat0s" targetRef="Event_0uvzk9t" />
+    <bpmn2:subProcess id="Activity_1rusn5b" triggeredByEvent="true">
+      <bpmn2:startEvent id="Event_1c7j5kb">
+        <bpmn2:outgoing>Flow_1d68aj0</bpmn2:outgoing>
+        <bpmn2:errorEventDefinition id="ErrorEventDefinition_1kuugoh" errorRef="Error_08cvc9g" />
+      </bpmn2:startEvent>
+      <bpmn2:userTask id="Activity_0syavmz" activiti:assignee="b">
+        <bpmn2:incoming>Flow_1d68aj0</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_1rej11y</bpmn2:outgoing>
+      </bpmn2:userTask>
+      <bpmn2:sequenceFlow id="Flow_1d68aj0" sourceRef="Event_1c7j5kb" targetRef="Activity_0syavmz" />
+      <bpmn2:endEvent id="Event_1fexho5">
+        <bpmn2:incoming>Flow_1rej11y</bpmn2:incoming>
+      </bpmn2:endEvent>
+      <bpmn2:sequenceFlow id="Flow_1rej11y" sourceRef="Activity_0syavmz" targetRef="Event_1fexho5" />
+    </bpmn2:subProcess>
+    <bpmn2:endEvent id="Event_0uvzk9t">
+      <bpmn2:incoming>Flow_1rt2f22</bpmn2:incoming>
+      <bpmn2:errorEventDefinition id="ErrorEventDefinition_13z8mdn" errorRef="Error_0pe8rde" />
+    </bpmn2:endEvent>
+  </bpmn2:process>
+  <bpmn2:error id="Error_0pe8rde" name="Error_0lrl8lt" />
+  <bpmn2:error id="Error_08cvc9g" name="Error_0lrl8lt" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="ErrorBeginEventTest">
+      <bpmndi:BPMNEdge id="Flow_1xlqjd9_di" bpmnElement="Flow_1xlqjd9">
+        <di:waypoint x="448" y="570" />
+        <di:waypoint x="500" y="570" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1rt2f22_di" bpmnElement="Flow_1rt2f22">
+        <di:waypoint x="600" y="570" />
+        <di:waypoint x="652" y="570" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="412" y="552" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1frat0s_di" bpmnElement="Activity_1frat0s">
+        <dc:Bounds x="500" y="530" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0xseqcv_di" bpmnElement="Event_0uvzk9t">
+        <dc:Bounds x="652" y="552" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_156ry4k_di" bpmnElement="Activity_1rusn5b" isExpanded="true">
+        <dc:Bounds x="290" y="710" width="410" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1d68aj0_di" bpmnElement="Flow_1d68aj0">
+        <di:waypoint x="358" y="810" />
+        <di:waypoint x="410" y="810" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1rej11y_di" bpmnElement="Flow_1rej11y">
+        <di:waypoint x="510" y="810" />
+        <di:waypoint x="562" y="810" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_1onjbk1_di" bpmnElement="Event_1c7j5kb">
+        <dc:Bounds x="322" y="792" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0syavmz_di" bpmnElement="Activity_0syavmz">
+        <dc:Bounds x="410" y="770" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1fexho5_di" bpmnElement="Event_1fexho5">
+        <dc:Bounds x="562" y="792" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>

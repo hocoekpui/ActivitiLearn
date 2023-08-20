@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:activiti="http://activiti.org/bpmn" id="sample-diagram" targetNamespace="http://activiti.org/bpmn" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+  <bpmn2:process id="MultiInstanceTest" name="多实例并行子流程" isExecutable="true">
+    <bpmn2:startEvent id="StartEvent_1">
+      <bpmn2:extensionElements>
+        <activiti:executionListener class="com.example.activitilearn.listener.MultiInstanceListener" event="start" />
+      </bpmn2:extensionElements>
+      <bpmn2:outgoing>Flow_18pk7pq</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:sequenceFlow id="Flow_18pk7pq" sourceRef="StartEvent_1" targetRef="Activity_1jcleqn" />
+    <bpmn2:subProcess id="Activity_1jcleqn">
+      <bpmn2:incoming>Flow_18pk7pq</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_1w8o241</bpmn2:outgoing>
+      <bpmn2:multiInstanceLoopCharacteristics activiti:collection="assigneeList" activiti:elementVariable="assignee">
+        <bpmn2:loopCardinality xsi:type="bpmn2:tFormalExpression">3</bpmn2:loopCardinality>
+      </bpmn2:multiInstanceLoopCharacteristics>
+      <bpmn2:startEvent id="Event_0njvsii">
+        <bpmn2:outgoing>Flow_0n3dg6a</bpmn2:outgoing>
+      </bpmn2:startEvent>
+      <bpmn2:userTask id="Activity_0r8jn4o" name="领取样品" activiti:assignee="${assignee}">
+        <bpmn2:incoming>Flow_0n3dg6a</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_1xbf9oo</bpmn2:outgoing>
+      </bpmn2:userTask>
+      <bpmn2:sequenceFlow id="Flow_0n3dg6a" sourceRef="Event_0njvsii" targetRef="Activity_0r8jn4o" />
+      <bpmn2:userTask id="Activity_1qjx0um" name="样品分析" activiti:assignee="${assignee}">
+        <bpmn2:extensionElements>
+          <activiti:taskListener class="com.example.activitilearn.listener.MultiInstanceTKListener" event="create" />
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_1xbf9oo</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_0vtvely</bpmn2:outgoing>
+      </bpmn2:userTask>
+      <bpmn2:sequenceFlow id="Flow_1xbf9oo" sourceRef="Activity_0r8jn4o" targetRef="Activity_1qjx0um" />
+      <bpmn2:endEvent id="Event_0icwsg8">
+        <bpmn2:incoming>Flow_0vtvely</bpmn2:incoming>
+      </bpmn2:endEvent>
+      <bpmn2:sequenceFlow id="Flow_0vtvely" sourceRef="Activity_1qjx0um" targetRef="Event_0icwsg8" />
+    </bpmn2:subProcess>
+    <bpmn2:endEvent id="Event_05iugl9">
+      <bpmn2:incoming>Flow_1w8o241</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="Flow_1w8o241" sourceRef="Activity_1jcleqn" targetRef="Event_05iugl9" />
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="MultiInstanceTest">
+      <bpmndi:BPMNEdge id="Flow_18pk7pq_di" bpmnElement="Flow_18pk7pq">
+        <di:waypoint x="318" y="293" />
+        <di:waypoint x="420" y="293" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1w8o241_di" bpmnElement="Flow_1w8o241">
+        <di:waypoint x="990" y="293" />
+        <di:waypoint x="1092" y="293" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="282" y="275" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_05iugl9_di" bpmnElement="Event_05iugl9">
+        <dc:Bounds x="1092" y="275" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ndetb7_di" bpmnElement="Activity_1jcleqn" isExpanded="true">
+        <dc:Bounds x="420" y="218" width="570" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0n3dg6a_di" bpmnElement="Flow_0n3dg6a">
+        <di:waypoint x="478" y="290" />
+        <di:waypoint x="530" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1xbf9oo_di" bpmnElement="Flow_1xbf9oo">
+        <di:waypoint x="630" y="290" />
+        <di:waypoint x="690" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0vtvely_di" bpmnElement="Flow_0vtvely">
+        <di:waypoint x="790" y="290" />
+        <di:waypoint x="852" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_0njvsii_di" bpmnElement="Event_0njvsii">
+        <dc:Bounds x="442" y="272" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0r8jn4o_di" bpmnElement="Activity_0r8jn4o">
+        <dc:Bounds x="530" y="250" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1qjx0um_di" bpmnElement="Activity_1qjx0um">
+        <dc:Bounds x="690" y="250" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0icwsg8_di" bpmnElement="Event_0icwsg8">
+        <dc:Bounds x="852" y="272" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>

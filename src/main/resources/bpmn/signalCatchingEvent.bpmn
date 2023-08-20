@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:activiti="http://activiti.org/bpmn" id="sample-diagram" targetNamespace="http://activiti.org/bpmn" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+  <bpmn2:process id="SignalCatchingEventTest" name="信号捕获事件测试" isExecutable="true">
+    <bpmn2:startEvent id="StartEvent_1">
+      <bpmn2:outgoing>Flow_0ex3usm</bpmn2:outgoing>
+      <bpmn2:signalEventDefinition id="SignalEventDefinition_0sh6eqf" signalRef="Signal_0cw8m8p" />
+    </bpmn2:startEvent>
+    <bpmn2:userTask id="Activity_1xfoma5" activiti:assignee="b">
+      <bpmn2:incoming>Flow_0ex3usm</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_0ohgr1o</bpmn2:outgoing>
+    </bpmn2:userTask>
+    <bpmn2:sequenceFlow id="Flow_0ex3usm" sourceRef="StartEvent_1" targetRef="Activity_1xfoma5" />
+    <bpmn2:endEvent id="Event_1m5vsgr">
+      <bpmn2:incoming>Flow_0ohgr1o</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="Flow_0ohgr1o" sourceRef="Activity_1xfoma5" targetRef="Event_1m5vsgr" />
+  </bpmn2:process>
+  <bpmn2:signal id="Signal_0cw8m8p" name="Signal_0urvt4n" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="SignalCatchingEventTest">
+      <bpmndi:BPMNEdge id="Flow_0ex3usm_di" bpmnElement="Flow_0ex3usm">
+        <di:waypoint x="528" y="430" />
+        <di:waypoint x="580" y="430" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ohgr1o_di" bpmnElement="Flow_0ohgr1o">
+        <di:waypoint x="680" y="430" />
+        <di:waypoint x="732" y="430" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_1pcgyq7_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="492" y="412" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1xfoma5_di" bpmnElement="Activity_1xfoma5">
+        <dc:Bounds x="580" y="390" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1m5vsgr_di" bpmnElement="Event_1m5vsgr">
+        <dc:Bounds x="732" y="412" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>

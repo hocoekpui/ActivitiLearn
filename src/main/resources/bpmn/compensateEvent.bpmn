@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="sample-diagram" targetNamespace="http://activiti.org/bpmn" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+  <bpmn2:process id="CompensateEvent" name="补偿事件测试" isExecutable="true">
+    <bpmn2:startEvent id="StartEvent_1" name="开始">
+      <bpmn2:outgoing>Flow_1p7iyzd</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:userTask id="Activity_1m3psdk" name="申请">
+      <bpmn2:incoming>Flow_1p7iyzd</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_17qfo2x</bpmn2:outgoing>
+    </bpmn2:userTask>
+    <bpmn2:sequenceFlow id="Flow_1p7iyzd" sourceRef="StartEvent_1" targetRef="Activity_1m3psdk" />
+    <bpmn2:exclusiveGateway id="Gateway_11szqaw">
+      <bpmn2:incoming>Flow_060va8w</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_0llpz06</bpmn2:outgoing>
+      <bpmn2:outgoing>Flow_1qmbklq</bpmn2:outgoing>
+    </bpmn2:exclusiveGateway>
+    <bpmn2:sequenceFlow id="Flow_0llpz06" sourceRef="Gateway_11szqaw" targetRef="Event_0zy9wi4">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${completed == 0}</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:intermediateThrowEvent id="Event_0zy9wi4" name="追加资料">
+      <bpmn2:incoming>Flow_0llpz06</bpmn2:incoming>
+      <bpmn2:compensateEventDefinition id="CompensateEventDefinition_0ah5gkz" />
+    </bpmn2:intermediateThrowEvent>
+    <bpmn2:endEvent id="Event_0ndyysp" name="结束">
+      <bpmn2:incoming>Flow_1qmbklq</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="Flow_1qmbklq" sourceRef="Gateway_11szqaw" targetRef="Event_0ndyysp">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${completed == 1}</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:boundaryEvent id="Event_0qqu4n5" attachedToRef="Activity_1m3psdk">
+      <bpmn2:compensateEventDefinition id="CompensateEventDefinition_1kizsb8" />
+    </bpmn2:boundaryEvent>
+    <bpmn2:userTask id="Activity_0yjfxgc" name="审批">
+      <bpmn2:incoming>Flow_17qfo2x</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_060va8w</bpmn2:outgoing>
+    </bpmn2:userTask>
+    <bpmn2:sequenceFlow id="Flow_17qfo2x" sourceRef="Activity_1m3psdk" targetRef="Activity_0yjfxgc" />
+    <bpmn2:sequenceFlow id="Flow_060va8w" sourceRef="Activity_0yjfxgc" targetRef="Gateway_11szqaw" />
+    <bpmn2:userTask id="Activity_17i4yjn" name="补充资料" isForCompensation="true" />
+    <bpmn2:association id="Association_0gfcope" associationDirection="One" sourceRef="Event_0qqu4n5" targetRef="Activity_17i4yjn" />
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="CompensateEvent">
+      <bpmndi:BPMNEdge id="Flow_060va8w_di" bpmnElement="Flow_060va8w">
+        <di:waypoint x="910" y="640" />
+        <di:waypoint x="995" y="640" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_17qfo2x_di" bpmnElement="Flow_17qfo2x">
+        <di:waypoint x="720" y="640" />
+        <di:waypoint x="810" y="640" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1qmbklq_di" bpmnElement="Flow_1qmbklq">
+        <di:waypoint x="1045" y="640" />
+        <di:waypoint x="1120" y="640" />
+        <di:waypoint x="1120" y="772" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0llpz06_di" bpmnElement="Flow_0llpz06">
+        <di:waypoint x="1020" y="665" />
+        <di:waypoint x="1020" y="772" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1p7iyzd_di" bpmnElement="Flow_1p7iyzd">
+        <di:waypoint x="538" y="640" />
+        <di:waypoint x="620" y="640" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="502" y="622" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="509" y="665" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1m3psdk_di" bpmnElement="Activity_1m3psdk">
+        <dc:Bounds x="620" y="600" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_11szqaw_di" bpmnElement="Gateway_11szqaw" isMarkerVisible="true">
+        <dc:Bounds x="995" y="615" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0fv3jy8_di" bpmnElement="Event_0zy9wi4">
+        <dc:Bounds x="1002" y="772" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1001" y="815" width="44" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0ndyysp_di" bpmnElement="Event_0ndyysp">
+        <dc:Bounds x="1102" y="772" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1109" y="815" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0yjfxgc_di" bpmnElement="Activity_0yjfxgc">
+        <dc:Bounds x="810" y="600" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0q63ecc_di" bpmnElement="Activity_17i4yjn">
+        <dc:Bounds x="810" y="750" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1hk0c6m_di" bpmnElement="Event_0qqu4n5">
+        <dc:Bounds x="652" y="662" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0gfcope_di" bpmnElement="Association_0gfcope">
+        <di:waypoint x="670" y="698" />
+        <di:waypoint x="670" y="790" />
+        <di:waypoint x="810" y="790" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>
